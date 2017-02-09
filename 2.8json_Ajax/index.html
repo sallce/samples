@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./css/master.css">
+    <title>User information</title>
+  </head>
+  <body>
+    <h1>User information</h1>
+    <button id="add" class="button">ADD</button>
+    <div class="form-area" id="user_form">
+      <span class="close" id="close_button">×</span>
+      <form id="new_user" onsubmit="return invalidate()">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" id="name"/>
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="text" id="email"/>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone:</label>
+          <input type="text" id="phone"/>
+        </div>
+        <div class="form-group">
+          <label for="address">Address:</label>
+          <input type="text" id="address"/>
+        </div>
+        <input type="submit" id="save" class="button" value="SAVE"/>
+        <input type="reset" value="Reset" class="button"/>
+      </form>
+    </div>
+    <table>
+      <tbody id="userTable">
+
+      </tbody>
+    </table>
+    <script src="./js/main.js"></script>
+  </body>
+</html>

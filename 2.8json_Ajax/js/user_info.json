@@ -1,0 +1,20 @@
+[
+  {
+    "name":"Yachao",
+    "email":"yachao@gmail.com",
+    "phone":"2987645109",
+    "address":"Piscataway"
+  },
+  {
+    "name":"Shang",
+    "email":"yachao@qq.com",
+    "phone":"6987645109",
+    "address":"Piscataway,NJ"
+  },
+  {
+    "name":"Yachao Shang",
+    "email":"yachao@gmail.com",
+    "phone":"2987645109",
+    "address":"New Jersey"
+  }
+]
