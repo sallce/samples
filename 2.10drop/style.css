@@ -1,0 +1,44 @@
+
+.divCls{
+  width:420px;
+  height:400px;
+  border:1px solid black;
+  overflow:auto;
+  margin: 10px auto;
+}
+
+
+img {
+  width:100%;
+  height:100px;;
+}
+
+div.img_box {
+  position: relative;
+  display: inline-block;
+  margin: 5px;
+  text-align: center;
+  border: 1px solid #ccc;
+  width: 200px;
+}
+
+div.img_box:hover {
+  border: 1px solid #777;
+}
+
+span {
+  position: absolute;
+  color: #f1f1f1;
+  right: 10px;
+  top: 5px;
+  font-weight: bold;
+  transition: 0.3s;
+  font-size: 28px;
+  display: none;
+}
+
+span:hover, span:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
