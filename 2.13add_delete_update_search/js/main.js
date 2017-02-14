@@ -1,6 +1,10 @@
 var user_info;
 var show_len = 10;
 var update_index = -1;
+//store matched data
+var resultInfo = [];//need to modify record number bar event
+var matchedIndex = [];
+var searched = false;
 
 //get all record number options
 var option_list = document.getElementById('recordlist').getElementsByTagName('li');
@@ -35,13 +39,14 @@ for(var i=0;i<option_len;i++){
   };
 }
 
-
-//content of search box is changed trigger the function
-$('#search_info').on('paste keyup',function(){
+//search function
+function searchForMatched(){
+  //clear resultInfo
+  resultInfo = [];
+  matchedIndex = [];
+  searched = true;
   //get the local data
   var localInfo = JSON.parse(localStorage.getItem("user_informations"));
-  //store matched data
-  var resultInfo = [];
 
   //not search input
   if($(this).val().length==0){
@@ -50,6 +55,7 @@ $('#search_info').on('paste keyup',function(){
       //remove error
       $('table').next().remove();
     }
+    searched = false;
     //show local information
     updateTable(JSON.parse(localStorage.getItem("user_informations")),show_len);
   }else{
@@ -57,13 +63,17 @@ $('#search_info').on('paste keyup',function(){
       for(key in localInfo[key1]){
         if(localInfo[key1][key].indexOf($(this).val()) >= 0){
           resultInfo.push(localInfo[key1]);
+          matchedIndex.push(key1);
           break;
         }
       }
     }
     searchResultTable(resultInfo,$(this).val());
   }
-});
+}
+
+//content of search box is changed trigger the function
+$('#search_info').on('paste keyup',searchForMatched);
 
 //show search result in table
 function searchResultTable(resultArray,searchContent){
@@ -86,7 +96,7 @@ function searchResultTable(resultArray,searchContent){
       $('table').next().remove();
     }
     //need to store index in array to rewrite for buttons
-    showUserInfo(resultArray,show_len);
+    updateTable(resultArray,show_len);
   }
 }
 
@@ -103,8 +113,21 @@ function updateTable(tableData,slen){
 function showDetail(keyindex,self){
   //get information array
   var localData = JSON.parse(localStorage.getItem("user_informations"));
+
+  var showIndex = keyindex;
+  console.log(localData[parseInt(keyindex)]);
   //get the selected tr
-  var currentselected = $('#userTable tr:not(".desc")').eq(parseInt(keyindex)+1);
+  if(searched){
+    for(key in matchedIndex){
+      if(matchedIndex[key] == keyindex){
+        showIndex = key;
+        break;
+      }
+    }
+  }else{
+    showIndex = keyindex;
+  }
+  var currentselected = $('#userTable tr:not(".desc")').eq(parseInt(showIndex)+1);
 
   if(currentselected.next().attr('class')=='desc'){
     currentselected.next().remove();
@@ -148,8 +171,19 @@ function deleteDetail(keyindex){
   localData.splice(keyindex,1);
   //store the new array back to local storage
   localStorage.setItem("user_informations", JSON.stringify(localData));
+  var showIndex = keyindex;
+  if(searched){
+    for(key in matchedIndex){
+      if(matchedIndex[key] == keyindex){
+        showIndex = key;
+        resultInfo.splice(showIndex,1);
+        break;
+      }
+    }
+  }
   //add fade out animation make sure keyindex is number instead of string
-  $('#userTable tr:not(".desc")').eq(parseInt(keyindex)+1).fadeOut("slow",function(){
+  $('#userTable tr:not(".desc")').eq(parseInt(showIndex)+1).fadeOut("slow",function(){
+
     updateTable(localData,show_len);
   });
 
@@ -159,7 +193,9 @@ function deleteDetail(keyindex){
 var showUserInfo = function(tableData,slen){
   var tableBody = document.getElementById("userTable");
   //var tableBody = document.createElement('tbody');
-
+  if(searched){
+    tableData = resultInfo;
+  }
   //check if there is information in tableData
   var len = tableData.length;
 
@@ -193,8 +229,11 @@ var showUserInfo = function(tableData,slen){
       showButton.innerHTML = "SHOW";
       //create value attribute
       var att = document.createAttribute("value");
-      //store the index of record
-      att.value = key1;
+      if(searched){
+        att.value = matchedIndex[key1];
+      }else{
+        att.value = key1;
+      }
       //add value attribute
       showButton.setAttributeNode(att);
       showButton.classList.add('showbutton');
@@ -209,7 +248,11 @@ var showUserInfo = function(tableData,slen){
       var editButton = document.createElement('button');
       editButton.innerHTML = "EDIT";
       var att = document.createAttribute("value");       // Create a "class" attribute
-      att.value = key1;
+      if(searched){
+        att.value = matchedIndex[key1];
+      }else{
+        att.value = key1;
+      }
       editButton.setAttributeNode(att);
       editButton.classList.add('editbutton');
       editButton.onclick = function(){
@@ -221,7 +264,11 @@ var showUserInfo = function(tableData,slen){
       var deleteButton = document.createElement('button');
       deleteButton.innerHTML = "DELETE";
       var att = document.createAttribute("value");       // Create a "class" attribute
-      att.value = key1;
+      if(searched){
+        att.value = matchedIndex[key1];
+      }else{
+        att.value = key1;
+      }
       deleteButton.setAttributeNode(att);
       deleteButton.classList.add('deletebutton');
       deleteButton.onclick = function(){
@@ -393,9 +440,27 @@ function invalidate(){
     if(update_index == -1){
       //add new object to the array
       table_array.unshift(new_user_info);
+      //if at search period
+      if(searched){
+        if($('$name').indexOf($('#search_info').val()) >= 0 || $('$email').indexOf($('#search_info').val()) >= 0 ||
+            $('$phone').indexOf($('#search_info').val()) >= 0 || $('$address').indexOf($('#search_info').val()) >= 0){
+          resultInfo.unshift(new_user_info);
+          matchedIndex.unshift(0);
+        }
+      }
     }else{//update
       table_array[update_index] = new_user_info;
+      if(searched){
+        console.log(matchedIndex.indexOf(update_index)+"updateid: "+update_index+"matched index"+matchedIndex);
+        for(key in matchedIndex){
+          if(matchedIndex[key] == update_index){
+            resultInfo[key] = new_user_info;
+            break;
+          }
+        }
+      }
     }
+    console.log(resultInfo);
     //storage the object array to local storage
     localStorage.setItem("user_informations", JSON.stringify(table_array));
     //show new table
