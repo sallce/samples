@@ -1,0 +1,303 @@
+body {
+  font-family: "Arial Black", Gadget, sans-serif;
+}
+
+table, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.notFound {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  padding: 30px;
+  font-size: 20px;
+  color: #A9A9A9;
+}
+
+.clear {
+  clear: both;
+}
+
+.menubar {
+  width: 100%;
+  text-align: center;
+}
+
+#search_info {
+  outline: none;
+  display: inline-block;
+  text-decoration: none;
+  font-size: 24px;
+  float: left;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: 2px solid #424c4f;
+}
+
+#search_info:focus {
+  border-radius: 5px;
+  border: 2px solid #38b2d1;
+}
+
+.deletebutton{
+  background-color: #d9534f;
+  border-radius: 5px;
+  font-size: 10px;
+  color: #fff;
+  padding: 5px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.deletebutton:hover {
+  background-color: #c9302c;
+}
+
+.showbutton{
+  background-color: #5cb85c;
+  border-radius: 5px;
+  font-size: 10px;
+  color: #fff;
+  padding: 5px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.showbutton:hover {
+  background-color: #449d44;
+}
+
+.editbutton{
+  background-color: #5bc0de;
+  border-radius: 5px;
+  font-size: 10px;
+  color: #fff;
+  padding: 5px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.editbutton:hover {
+  background-color: #31b0d5;
+}
+
+.record_number {
+  display: inline-block;
+  float: right;
+}
+
+.record_number li {
+  display: inline-block;
+  padding: 5px;
+  background-color: lightgray;
+}
+
+.record_number li.active {
+  background-color: gray;
+  cursor: default;
+}
+
+.record_number li:hover:not(.active) {
+  cursor: pointer;
+  background-color: #9e9e9e;
+}
+
+#add {
+  display: inline-block;
+  float: left;
+}
+
+th, td {
+  padding: 10px;
+}
+
+table tr:not(.desc){
+  background-color: #eee;
+}
+
+table tr.desc{
+  background-color: lightgray;
+  animation-name: slowin;
+  animation-duration: 2s;
+}
+
+@keyframes slowin {
+  from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+/*
+table tr:not(.desc):nth-child(odd) {
+  background-color: #fff;
+}*/
+
+table th {
+  font-size: 24px;
+  background-color: #292b2c;
+  color: #fff;
+}
+
+table {
+  width:100%;
+}
+
+.err {
+  color: red;
+}
+
+.form-area {
+  position: relative;
+  display: none;
+  border-radius: 15px;
+  text-align: center;
+  width: 30%;
+  height: 400px;
+  margin-left: 35%;
+  margin-right: 35%;
+  margin-bottom: 20px;
+  background-color: grey;
+  padding: 20px;
+}
+
+.form-area.fadein {
+  animation-name: fadeina;
+  animation-duration: 2s;
+}
+
+@keyframes fadeina {
+  0%{opacity: 0; height: 0px;}
+  50%{height: 400px;}
+  100%{opacity: 1;}
+}
+
+.form-area.fadeout{
+  animation-name: fadeouta;
+  animation-duration: 2s;
+}
+
+@keyframes fadeouta {
+  0%{opacity: 1; height: 400px;}
+  45%{opacity: 0;}
+  100%{height: 0px;}
+}
+
+.form-group {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.form-group input{
+  width: 100%;
+}
+
+.form-group{
+  text-align: left;
+}
+
+.button {
+    background-color: #0275d8;
+    border-color: #acd2f2;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #fff;
+    padding: 10px;
+    width: 80px;
+    text-align: center;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.button:hover {
+  background-color: #025aa5;
+}
+
+/* Close button */
+.close {
+  position: absolute;
+  top: 0px;
+  right: 10px;
+  color: #e1e1e1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover, .close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+
+@media only screen and (min-width:600px) and (max-width:850px) {
+  .form-area {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+  #save {
+    width: 40%;
+  }
+  #reset {
+    width: 40%;
+  }
+}
+
+@media only screen and (max-width:600px){
+  body {
+    font-family: "Courier New", Courier, monospace;
+  }
+  table td {
+    width: 25%;
+    margin: 0px;
+    padding: 0px;
+  }
+
+  table th {
+    font-size: 15px;
+  }
+  .form-area {
+    clear: both;
+    width: 90%;
+    height: 430px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  @keyframes fadeina {
+    0%{opacity: 0; height: 0px;}
+    50%{height: 430px;}
+    100%{opacity: 1;}
+  }
+
+  @keyframes fadeouta {
+    0%{opacity: 1; height: 430px;}
+    45%{opacity: 0;}
+    100%{height: 0px;}
+  }
+
+  #save {
+    width: 100%;
+  }
+  #reset {
+    width: 100%;
+  }
+}

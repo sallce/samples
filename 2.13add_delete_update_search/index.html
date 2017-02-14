@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./css/master.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <title>User information</title>
+  </head>
+  <body>
+    <h1>User information</h1>
+    <button id="add" class="button">ADD</button>
+    <div class="form-area" id="user_form">
+      <span class="close" id="close_button">×</span>
+      <form id="new_user" onsubmit="return false">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" id="name"/>
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="text" id="email"/>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone:</label>
+          <input type="text" id="phone"/>
+        </div>
+        <div class="form-group">
+          <label for="address">Address:</label>
+          <input type="text" id="address"/>
+        </div>
+        <input type="submit" onclick="invalidate()" id="save" class="button" value="SAVE"/>
+        <input type="reset" value="Reset" class="button"/>
+      </form>
+    </div>
+    <div class="clear"> </div>
+    <div class="menubar">
+      <input type="text" id="search_info" placeholder="Search..."/>
+      <ul class="record_number" id="recordlist">
+        <li class="active">10</li>
+        <li>20</li>
+        <li>50</li>
+        <li>all</li>
+      </ul>
+    </div>
+
+    <table>
+      <tbody id="userTable">
+
+      </tbody>
+    </table>
+    <script src="./js/main.js"></script>
+  </body>
+</html>
