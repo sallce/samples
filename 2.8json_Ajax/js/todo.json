@@ -1,0 +1,20 @@
+[
+  {
+    "id":"0",
+    "todo":"Kiss SHANG",
+    "complete":"flase",
+    "color":"red"
+  },
+  {
+    "id":"1",
+    "todo":"Call SHANG",
+    "complete":"true",
+    "color":"green"
+  },
+  {
+    "id":"2",
+    "todo":"Buy milk",
+    "complete":"flase",
+    "color":"blue"
+  }
+]
